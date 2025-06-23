@@ -6,11 +6,11 @@ Average case analysis: Running time on average
 ### Notations
 Algorithm analyses typically focus on growth rate than on exact running time functions. Asymptotic notations are used to describe these growth rates
 #### $O$-notation
-$g(n)=O(f(n))$ if there exists a constant $C$ such that $0\leq g(n) \leq Cf(n)$ for all possible input sizes $n$.
+$g(n)=O(f(n))$ if there exists a positive constant $C$ such that $0\leq g(n) \leq Cf(n)$ for all possible input sizes $n$.
 #### $\Omega$-notation
-$g(n)=\Omega(f(n))$ if there exists a constant $C$ such that $0\leq Cf(n) \leq g(n)$ for all possible input sizes $n$.
-#### $\Omega$-notation
-$g(n)=\Theta(f(n))$ if there exists  constants $C_1$ and $C_2$ such that $0\leq C_1 f(n)\leq f(n) \leq C_2 g(n)$ for all possible input sizes $n$.
+$g(n)=\Omega(f(n))$ if there exists a positive constant $C$ such that $0\leq Cf(n) \leq g(n)$ for all possible input sizes $n$.
+#### $\Theta$-notation
+$g(n)=\Theta(f(n))$ if there exists two positive constants $C_1$ and $C_2$ such that $0\leq C_1 f(n)\leq f(n) \leq C_2 g(n)$ for all possible input sizes $n$.
 ### Working Example: Insertion Sort
 A pseudocode for this algorithm for an array $A$ is as follows (assume 1-indexing):
 - for all $i$ in $(2, 3, ..., n)$:
