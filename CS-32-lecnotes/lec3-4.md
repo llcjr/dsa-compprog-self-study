@@ -48,7 +48,7 @@ Involves a `Node` type, usually implemented by the user. The top of the stack is
 	- $head \leftarrow deref(head.next)$
 	- return $val$
 
-Note that dereferencing $NULL$ will most likely lead to an error/segfault. One can instead use a "null node" or have the stack define placeholder values for `head` when it's empty.
+Note that dereferencing $NULL$ will most likely lead to an error/segfault. One can instead use a "null node" or have the stack define placeholder values for `head` when it's empty. It's also trivial to show that all the operations in both implementations have $O(1)$ running time
 
 ### Pros and Cons
 Capacity: Linked list allows for allocating of endless nodes, while array maintains a limit for the number of elements
@@ -105,8 +105,5 @@ Implementation:
 	- $curr \leftarrow S.pop()$
 	- $ans \leftarrow ans + A[curr](i-curr)(curr-peek())$
 
-Here, the stack uses indices for storing subarray mins. the $(i-curr)$ factor represents the popped element's "lifetime" and $(curr-peek())$ represents how many duplicate values it has when the stack is mapped out into the inequality at (1)
-
-	
-
-
+Here, the stack uses indices for storing subarray mins. the $(i-curr)$ factor represents the popped element's "lifetime" and $(curr-peek())$ represents how many duplicate values it has when the stack is mapped out into the inequality at (1).
+Why is the algorithm $O(n)$? This is beacuase each element in the stack corresponds to a unique element in $A$ and is accessed a fixed number of times (`push`, `pop`, and at most 2 `peek` operations.)
