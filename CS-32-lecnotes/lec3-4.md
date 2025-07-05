@@ -34,21 +34,19 @@ Involves a `Node` type, usually implemented by the user. The top of the stack is
 - typedef $NODE$:
 	- value $data$
 	- pointer(value) $next$
-- $top \leftarrow NULL$
-- NODE $head$
+- pointer(NODE) $top \leftarrow NULL$
 - def push($node$):
-	- $head \leftarrow node$
-	- $head.next \leftarrow top$
+	- $node.next \leftarrow top$
 	- $top \leftarrow address(node)$
 - def pop():
 	- if $top = NULL$:
-		- throw $UNDERFLOW$
-	- $val \leftarrow head.data$
-	- $top \leftarrow head.next$
-	- $head \leftarrow deref(head.next)$
+		- throw UNDERFLOW
+	- $val \leftarrow deref(top).data$
+	- $deref(top).next \leftarrow NULL$
+	- $top \leftarrow deref(top).next$
 	- return $val$
 
-Note that dereferencing $NULL$ will most likely lead to an error/segfault. One can instead use a "null node" or have the stack define placeholder values for `head` when it's empty. It's also trivial to show that all the operations in both implementations have $O(1)$ running time
+It's trivial to show that all the operations in both implementations have $O(1)$ running time.
 
 ### Pros and Cons
 Capacity: Linked list allows for allocating of endless nodes, while array maintains a limit for the number of elements
@@ -97,7 +95,7 @@ Implementation:
 	- $S.push(val)$
 	- return $val$
 - for all $i$ in $(1, 2, ..., n)$:
-	- while $~S.isEmpty() \vee A[peek()] > A[i]$:
+	- while $¬S.isEmpty() \vee A[peek()] > A[i]$:
 		- $curr \leftarrow S.pop()$
 		- $ans \leftarrow ans + A[curr](i-curr)(curr-peek())$
 	- $S.push(A[i])$
