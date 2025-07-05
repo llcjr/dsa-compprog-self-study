@@ -85,7 +85,7 @@ SPS: You are given a partial order relation $\prec$ and a directed acyclic graph
 - input $n \leftarrow |G.v|$
 - array $E \leftarrow |G.e|$
 - input array(array) $adj$, form $(v \in (1, 2, ..., n)| \ u \in (1, 2, ..., n) \setminus (v,) | (v, u) \in E)$
-- input array $ancestors$, form $(v \in (1, 2, ..., n)| \ |u \in (1, 2, ..., n) \setminus (v,) | (u, v) \in E|)$
+- input array $count$, form $(v \in (1, 2, ..., n)| \ |u \in (1, 2, ..., n) \setminus (v,) | (u, v) \in E|)$
 - while $¬S.isFull()$:
 	- for all $i$ in (1, 2, ..., n):
 		- if $count[i] = 0$:
