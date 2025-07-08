@@ -56,44 +56,72 @@ Primary operations:
 
 The implementation is similar to that of its queue counterpart, but for moving the deque, it moves the elements to the middle of the array. Indication for an empty deque is different however, as it uses a $l > r$ case as a flag for it. Insertion takes $O(n)$ time and deletion takes $O(1)$ time.
 
+#### Circular Implementation
+- array $D[n+1]$
+- $r \leftarrow 1$
+- $l \leftarrow 2$
+- def $insertDeque(left, e)$:
+    - if $l = ((r + 1) \mod (n + 1)) + 1$:
+        - throw $OVERFLOW$
+    - if $left$:
+        - $l \leftarrow n + 1 - ((1 - l) \mod (n+1))$
+        - $D[l] = e$
+    - else:
+        - $r \leftarrow (r \mod (n+1)) + 1$
+        - $D[r] \leftarrow e$
+- def $deleteDeque(left, e)$:
+    - if $l = (r \mod n) + 1$:
+        - throw $UNDERFLOW$
+    - number $val$
+    - if $left$:
+        - $val \leftarrow D[l]$
+        - $l \leftarrow (l \mod (n+1)) + 1$
+    - else:
+        - $val \leftarrow D[r]$
+        - $r \leftarrow n + 1 - ((1 - r) \mod (n+1))$
+    - return $val$
+- def $isEmpty()$: return $l = (r \mod n) + 1$
+- def $isFull()$: return $((r + 1) \mod (n+1)) + 1$
+
+
 #### Linked Implementation 
 - typedef node:
 	- number $data$
 	- pointer(node) $next$
 	- pointer(node) $prev$
-- pointer(node) $left \leftarrow NULL$
-- pointer(node) $right \leftarrow NULL$
+- pointer(node) $l \leftarrow NULL$
+- pointer(node) $r \leftarrow NULL$
 - $n \leftarrow 0$
 - def $insertDeque(left, node)$:
 	- pointer(node) $p \leftarrow address(node)$
 	- if $left$:
-		- $node.next \leftarrow left$
-		- if $left \ne NULL$:
-			- $deref(left).prev \leftarrow p$
-		- $left\leftarrow p$
-		- $right \leftarrow (right, p)[right = NULL]$
+		- $node.next \leftarrow l$
+		- if $l \ne NULL$:
+			- $deref(l).prev \leftarrow p$
+		- $l \leftarrow p$
+		- $r \leftarrow (r, p)[r = NULL]$
 	- else:
-		- $node.prev \leftarrow right$
-		- if $right \ne NULL$:
-			- $deref(right).next \leftarrow p$
-		- $right \leftarrow p$
-		- $left \leftarrow (left, p)[left = NULL]$
+		- $node.prev \leftarrow r$
+		- if $r \ne NULL$:
+			- $deref(r).next \leftarrow p$
+		- $r \leftarrow p$
+		- $l \leftarrow (l, p)[l = NULL]$
 	- $n \leftarrow n + 1$
 	- def $deleteDeque(left)$:
 		- if $l = NULL \wedge r= NULL$:
 			- throw $OVERFLOW$
-		- $node \leftarrow (deref(right), deref(left))[left]$
+		- $node \leftarrow (deref(r), deref(l))[l]$
 		- $val \leftarrow node.data$
 		- if $left$
 			- if $node.next \ne NULL$:
 				- $deref(node.next).prev \leftarrow NULL$
-			- $left \leftarrow node.next$
-			- $right \leftarrow (right, NULL)[left = NULL]$
+			- $l \leftarrow node.next$
+			- $r \leftarrow (r, NULL)[l = NULL]$
 		- else:
 			- if $node.prev \ne NULL$:
 				- $deref(node.next).next \leftarrow NULL$
-			- $right \leftarrow node.prev$
-			- $left \leftarrow (left, NULL)[right = NULL]$
+			- $r \leftarrow node.prev$
+			- $l \leftarrow (l, NULL)[r = NULL]$
 		- $n \leftarrow n-1$
 		- return $val$
 - def $length()$: return $n$
